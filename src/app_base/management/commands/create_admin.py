@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
-from django.core.management.app_base import app_baseCommand
+from django.core.management.base import BaseCommand
 
 
-class Command(app_baseCommand):
+class Command(BaseCommand):
     help = "Создание администратора"
 
     def add_arguments(self, parser):
