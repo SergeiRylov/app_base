@@ -92,8 +92,8 @@
         <aside class="app-sidebar bg-dark-subtle" data-bs-theme="">
             <div class="sidebar-brand sp_color">
                 <a href="/" class="brand-link">
-                    <img src="{% static 'images/logo.jpg' %}" alt="Лого" class="brand-image opacity-100 logo-collapsed logo-expanded"
-                        style="max-height: 60px;">
+                    <img src="{% static 'images/logo.jpg' %}" alt="Лого"
+                        class="brand-image opacity-100 logo-collapsed logo-expanded" style="max-height: 60px;">
                     <!-- <img src="{% static 'images/logo-wide.png' %}" alt="Логотип" class="brand-image opacity-100 logo-expanded"> -->
                     <span class="brand-text fw-light text-white">Текст</span>
                 </a>
@@ -153,14 +153,14 @@
                         style="padding-top: 1rem;padding-bottom: 1rem;margin-top: 0.25rem;margin-bottom: 0.25rem;">
                         {{message|safe}}
                     </div>
+                    {% else %}
+                    <div class="callout callout-danger"
+                        style="padding-top: 1rem;padding-bottom: 1rem;margin-top: 0.25rem;margin-bottom: 0.25rem;">
+                        <h5><i class="icon fas fa-ban"></i> ? {{message|safe}}</h5>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
-                {% else %}
-                <div class="callout callout-danger"
-                    style="padding-top: 1rem;padding-bottom: 1rem;margin-top: 0.25rem;margin-bottom: 0.25rem;">
-                    <h5><i class="icon fas fa-ban"></i> ? {{message|safe}}</h5>
-                </div>
-                {% endif %}
-                {% endfor %}
             </div>
             <div class="app-content" style="padding-left: 0px;padding-right: 0px;">
                 <div class="container-fluid">
@@ -231,7 +231,7 @@
             new TomSelect(".select2", {
                 allowEmptyOption: true, // create: true
             });
-        } catch (e) {/* Ignore TomSelect initialization errors */}
+        } catch (e) {/* Ignore TomSelect initialization errors */ }
     </script>
     {% block js %}{% endblock js %}
 </body>
