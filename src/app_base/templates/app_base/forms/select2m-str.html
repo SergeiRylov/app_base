@@ -1,0 +1,7 @@
+{% load arithmetic %}
+
+<select class="form-select select2" multiple name="{{field.name}}" id="id_{{field.name}}">
+    {% for v, t in field.field.choices %}
+    <option value="{{v}}"{% if field.value|to_str == v|to_str %} selected{% endif %}>{{t}}</option>
+    {% endfor %}
+</select>

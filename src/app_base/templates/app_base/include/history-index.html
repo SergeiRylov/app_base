@@ -1,0 +1,62 @@
+{% extends 'app_base/page.html' %}
+{% load app_base_tag %}
+
+{% block page %}
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">
+            История
+            <span class="count_delimiter">
+                {{ logs.paginator.count }}
+            </span>
+        </h4>
+        <!-- <form method="GET" action="{#% url 'iam:ad' %#}">
+            <div class="input-group" style="width: 500px;">
+                {% include 'app_base/forms/input-str.html' with field=form.search %}
+                {% include 'app_base/forms/select-str.html' with field=form.ou %}
+                <button type="submit" class="btn btn-primary input-group-text">Искать</button>
+            </div>
+        </form> -->
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th width="10%">
+                        Дата
+                        {% include 'include/table-sort.html' with abs='date' desc='-date' default='abs' %}
+                    </th>
+                    <th width="10%">
+                        Сотрудник
+                    </th>
+                    <th width="10%">
+                        Операция
+                    </th>
+                    <th>
+                        Данные
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>
+                        {{ log.date }}
+                    </td>
+                    <td>
+                        {{ log.user.get_full_name|default:log.user|default:"-" }}
+                    </td>
+                    <td>
+                        {{ log.oper }}
+                    </td>
+                    <td>
+                        {{ log.data }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% include 'include/pagination.html' with pages=logs %}
+    </div>
+</div>
+{% endblock %}

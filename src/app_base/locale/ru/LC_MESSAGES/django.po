@@ -1,0 +1,93 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-09 10:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: app_base/forms.py:8
+msgid "username"
+msgstr ""
+
+#: app_base/forms.py:10
+msgid "Username or email"
+msgstr "Имя пользователя или email"
+
+#: app_base/forms.py:14 app_base/templates/app_base/login-modal.html:14
+msgid "password"
+msgstr "пароль"
+
+#: app_base/forms.py:16 app_base/templates/app_base/login-modal.html:13
+msgid "Password"
+msgstr "Пароль"
+
+#: app_base/forms.py:23
+msgid "Current password"
+msgstr "Текущий пароль"
+
+#: app_base/forms.py:28
+msgid "New password"
+msgstr "Новый пароль"
+
+#: app_base/forms.py:33
+msgid "Confirm password"
+msgstr "Подтваерждение"
+
+#: app_base/templates/app_base/login-modal.html:8
+msgid "Authenticate"
+msgstr "Авторизация"
+
+#: app_base/templates/app_base/login-modal.html:33
+msgid "Login"
+msgstr "Логин"
+
+#: app_base/views.py:54
+msgid "Invalid credentials"
+msgstr "Ошибочные данные"
+
+#: app_base/views.py:56
+msgid "Error validating the form"
+msgstr "Ошибка обработки формы"
+
+#: app_base/views.py:136
+msgid "Error 400"
+msgstr ""
+
+#: app_base/views.py:136
+msgid "Bad request"
+msgstr ""
+
+#: app_base/views.py:144
+msgid "Error 403"
+msgstr ""
+
+#: app_base/views.py:144
+msgid "Permission denied"
+msgstr ""
+
+#: app_base/views.py:152
+msgid "Error 404"
+msgstr ""
+
+#: app_base/views.py:152
+msgid "Page not found"
+msgstr ""
+
+#: app_base/views.py:157
+msgid "Error 500"
+msgstr ""

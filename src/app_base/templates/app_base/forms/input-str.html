@@ -1,0 +1,5 @@
+<input class="form-control" name="{{field.name}}" id="id_{{field.name}}" type="text" 
+    {% if field.field.widget.attrs.placeholder %}placeholder="{{field.field.widget.attrs.placeholder}}"{% elif placeholder %}placeholder="{{placeholder}}"{% endif %}
+    {% if field.field.required %}required=""{% endif %}
+    {% if field.value %}value="{{field.value}}"{% endif %}
+/>

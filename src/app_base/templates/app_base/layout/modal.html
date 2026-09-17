@@ -1,0 +1,145 @@
+<!-- File: app_base/templates/layout/modal.html -->
+<div class="modal fade" id="ajaxModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body py-5 text-center">
+                <div class="spinner-border" role="status"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', initializeModal);
+
+    function initializeModal() {
+        // Initialization
+        const modalEl = document.getElementById('ajaxModal');
+        const bsModal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+
+        // Allow closing the modal by clicking on the backdrop or pressing Esc
+        function enableDismissOnError() {
+            modalEl.addEventListener('click', backdropHandler, { once: true });
+            document.addEventListener('keydown', escHandler, { once: true });
+        }
+        function backdropHandler(e) {
+            if (e.target === modalEl) bsModal.hide();
+        }
+        function escHandler(e) {
+            if (e.key === 'Escape') bsModal.hide();
+        }
+
+        // Function to open the modal with content loaded from a URL
+        async function openModalWithUrl(url) {
+            bsModal.show();
+            try {
+                const resp = await fetch(url, { credentials: 'same-origin' });
+                if (!resp.ok) throw new Error(`${resp.status} ${resp.statusText}`);
+                const html = (await resp.text()).trim();
+
+                const temp = document.createElement('div');
+                temp.innerHTML = html;
+                const newDialog = temp.querySelector('.modal-dialog');
+                if (!newDialog) throw new Error('Response does not contain .modal-dialog');
+
+                const oldDialog = modalEl.querySelector('.modal-dialog');
+                oldDialog.replaceWith(newDialog);
+
+                try {
+                    new TomSelect(".select2", {
+                        allowEmptyOption: true,
+                        // create: true
+                    });
+                } catch (e) {
+                    // Ignore TomSelect initialization errors
+                }
+
+                bsModal.handleUpdate();
+            } catch (err) {
+                const body = modalEl.querySelector('.modal-body') ||
+                    modalEl.querySelector('.modal-content') ||
+                    modalEl;
+                body.innerHTML =
+                    `<div class="alert alert-danger mb-0">Loading error: ${err.message}</div>`;
+                bsModal.handleUpdate();
+                enableDismissOnError();
+            }
+        }
+
+        // Event handler to call the function to open the modal
+        document.addEventListener('click', e => {
+            const link = e.target.closest('.modal-link');
+            if (!link) return;
+            e.preventDefault();
+            const url = link.getAttribute('href') || link.dataset.url;
+            if (url) openModalWithUrl(url);
+        });
+    }
+
+    async function formSubmit(el, submit) {
+        const element = el;
+        element.disabled = true; //{# Деактивация кнопка для блок. повторного нажатия #}
+        element.classList.add('disabled');
+        const form = element.closest('form'); // Find the closest form
+        if (!form) {
+            console.error('Form not found for element:', element);
+            return;
+        }
+
+        const modalEl = document.getElementById('ajaxModal');
+        const bsModal = bootstrap.Modal.getInstance(modalEl);
+        const action = form.action || window.location.href;
+        const formData = new FormData(form);
+        if (submit) {
+            formData.append('submit', submit);
+        }
+
+        try {
+            const resp = await fetch(action, {
+                method: form.method || 'POST',
+                body: formData,
+                credentials: 'same-origin',
+            });
+
+            if (resp.redirected) {
+                // Handle redirection
+                if (bsModal) bsModal.hide();
+                window.location.href = resp.url;
+                return;
+            }
+
+            if (!resp.ok) {
+                throw new Error(`${resp.status} ${resp.statusText}`);
+            }
+
+            const html = (await resp.text()).trim();
+
+            const temp = document.createElement('div');
+            temp.innerHTML = html;
+            const newDialog = temp.querySelector('.modal-dialog');
+            if (!newDialog) throw new Error('Response does not contain .modal-dialog');
+
+            const oldDialog = modalEl.querySelector('.modal-dialog');
+            oldDialog.replaceWith(newDialog);
+
+            // // Event delegation example: handle clicks on .modal-save inside modal
+            // modalEl.addEventListener('click', function(e) {
+            //     const saveBtn = e.target.closest('.modal-save');
+            //     if (saveBtn) {
+            //         // Your save handler logic here
+            //         // e.g., formSubmit(saveBtn);
+            //     }
+            // });
+
+            bsModal.handleUpdate();
+        } catch (err) {
+            console.error('Form submission error:', err);
+
+            const body = modalEl.querySelector('.modal-body') || modalEl.querySelector('.modal-content') || modalEl;
+            body.innerHTML =
+                `<div class="alert alert-danger mb-0">Loading error: ${err.message}</div>`;
+            bsModal.handleUpdate();
+            enableDismissOnError();
+        }
+    }
+</script>
+<!-- File: app_base/templates/layout/modal.html -->

@@ -1,0 +1,8 @@
+<input type="date" class="form-control" id="id_{{ field.name }}" name="{{ field.name }}"
+       {% if field.field.widget.attrs.placeholder %}placeholder="{{ field.field.widget.attrs.placeholder }}"{% endif %}
+       {% if field.value|date:'Y-m-d' %}value="{{field.value|date:'Y-m-d'}}"{% elif field.value %}value="{{field.value}}"{% endif %}
+       {% if field.field.required %}required{% endif %}
+       {% if fitcontent %}style="width: fit-content;"{% endif %}>
+
+
+

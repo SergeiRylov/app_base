@@ -1,0 +1,4 @@
+<textarea class="form-control" id="id_{{field.name}}" name="{{field.name}}" 
+{% if field.field.widget.attrs.placeholder%} placeholder="{{field.field.widget.attrs.placeholder}}"{% endif %} 
+{% if rows %} rows="{{rows}}"{% endif %}>
+{% if field.value %}{{field.value}}{% endif %}</textarea>

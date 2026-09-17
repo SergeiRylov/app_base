@@ -1,0 +1,37 @@
+{% load i18n %}
+
+<div class="modal-dialog modal-sm">
+    <form method="post" action="{% url 'app_base:login-modal' %}">
+        {% csrf_token %}
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{% trans 'Authenticate' %}</h4>
+                <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% include 'app_base/forms/input.html' with field=form.username %}
+                <label class="form-label" for="inputPassword4">{% trans 'Password' %}<span class="text-danger" style="margin-left: 0.25rem;">*</span></label>
+                <input class="form-control" id="inputPassword4" type="password" placeholder="{% trans 'password' %}" name="password" required>
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger mt-2">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+                {% if form.username.errors %}
+                <div class="alert alert-danger mt-2">
+                    {{ form.username.errors }}
+                </div>
+                {% endif %}
+                {% if form.password.errors %}
+                <div class="alert alert-danger mt-2">
+                    {{ form.password.errors }}
+                </div>
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-link" type="button" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-primary" type="submit">{% trans 'Login' %}</button>
+            </div>
+        </div>
+    </form>
+</div>

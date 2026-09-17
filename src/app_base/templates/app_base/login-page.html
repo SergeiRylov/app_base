@@ -1,0 +1,41 @@
+{% extends 'app_base/page.html' %}
+
+{% block page %}
+<form method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-header custom-border-bottom">
+                    <h4>Вход</h4>
+                </div>
+                <div class="card-body">
+                    {% include 'app_base/forms/input.html' with field=form.username %}
+                    {#% include 'app_base/forms/input.html' with field=form.password %#}
+                    <label class="form-label" for="inputPassword4">Пароль</label>
+                    <input class="form-control" id="inputPassword4" type="password" placeholder="password" name="password" required>
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger mt-2">
+                        {{ form.non_field_errors }}
+                    </div>
+                    {% endif %}
+                    {% if form.username.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {{ form.username.errors }}
+                    </div>
+                    {% endif %}
+                    {% if form.password.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {{ form.password.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-secondary float-end" type="submit">Вход</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

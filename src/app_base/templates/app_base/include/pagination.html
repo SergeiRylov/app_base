@@ -1,0 +1,67 @@
+{% load app_base_tag arithmetic %}
+
+<ul class="pagination m-0 float-end">
+    {% if pages.has_previous %}
+    <li class="page-item m-1">
+        <a class="page-link"  href="{% get_param_set 'page' pages.previous_page_number %}">&laquo;</a>
+    </li>
+    {% else %}
+    <li class="page-item m-1">
+        <a class="page-link" >&laquo;</a>
+    </li>
+    {% endif %}
+
+    {% with active_page=pages.number %}
+    {% for page_number in pages.paginator.page_range %}
+        {# if we're beyond the first five pages, just show "..." until three pages before the current page #}
+        {# e.g. on page 12 show: "... 9 10 11 12" #}
+        {% if active_page > 5 and page_number < active_page|subtract:4 %}
+            {# nothing to show #}
+        {% elif active_page > 5 and page_number == active_page|subtract:4 %}
+            {# show '...' #}
+            <li class="page-item m-1">
+                <a class="page-link"  href="{% get_param_set 'page' 1 %}">1</a>
+            </li>
+            <li class="page-item m-1">
+                <p class="page-link" >...</p>
+            </li>
+
+        {# if we're before the last five pages, just show "..." for pages more than three after the current page #}
+        {# e.g. on page 1 of 10 show: "1 2 3 4 ..." #}
+        {% elif active_page < pages.paginator.num_pages|subtract:5 and page_number > active_page|add:4 %}
+            {# nothing to show #}
+        {% elif active_page < pages.paginator.num_pages|subtract:5 and page_number == active_page|add:4 %}
+            {# show '...' #}
+            <li class="page-item m-1">
+                <a class="page-link" >...</a>
+            </li>
+            <li class="page-item m-1">
+                <a class="page-link"  href="{% get_param_set 'page' pages.paginator.num_pages %}">{{ pages.paginator.num_pages }}</a>
+            </li>
+        {% else %}
+            {# show the page number as normal #}
+            {% if page_number == active_page %}
+                {# highlight the current page #}
+                <li class="page-item m-1 active">
+                    <a class="page-link" >{{ page_number }}</a>
+                </li>
+            {% else %}
+                <li class="page-item m-1">
+                    <a class="page-link" href="{% get_param_set 'page' page_number %}">{{ page_number }}</a>
+                </li>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    {% endwith %}
+    
+    {% if pages.has_next %}
+    <li class="page-item m-1">
+        <a class="page-link"  href="{% get_param_set 'page' pages.next_page_number %}">&raquo;</a>
+    </li>
+    {% else %}
+    <li class="page-item m-1">
+        <a class="page-link" >&raquo;</a>
+    </li>
+    {% endif %}
+</ul>
+

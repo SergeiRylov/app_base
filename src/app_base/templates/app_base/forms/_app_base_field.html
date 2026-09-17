@@ -1,0 +1,22 @@
+<div style="margin-bottom: 0.75rem;">
+    <label class="form-label" for="id_{{field.name}}">
+        {{field.label}}
+        {% if field.field.required %}<span class="text-danger" style="margin-left: 0.25rem;">*</span>{% endif %}
+    </label>
+    {% block field %}{% endblock %}
+    {% if field.errors %}
+        <div class="text-danger">
+            {% for error in field.errors %}
+                {% if error == 'This field is required.' %}
+                    Обязательное поле
+                {% else %}
+                    {{error}}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% elif field.field.help_text %}
+    <div class="form-text text-muted">
+        {{field.field.help_text}}
+    </div>
+    {% endif %}
+</div>

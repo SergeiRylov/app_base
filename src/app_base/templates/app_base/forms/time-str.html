@@ -1,0 +1,4 @@
+<input type="time" class="form-control" id="id_{{ field.name }}" name="{{ field.name }}" min="00:00" max="23:59"
+    {% if field.field.widget.attrs.placeholder %}placeholder="{{ field.field.widget.attrs.placeholder }}"{% endif %}
+    {% if field.value %}value="{{ field.value }}"{% endif %}
+    {% if field.field.required %}required{% endif %}>

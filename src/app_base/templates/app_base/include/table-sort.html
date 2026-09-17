@@ -1,0 +1,25 @@
+{% load app_base_tag %}
+{% if request.GET.sort == desc %}
+<a href="{{request.path}}{% get_param_set 'sort' abs %}">
+    <i class="bi bi-arrow-down"></i><b><i class="bi bi-arrow-up text-black"></i></b>
+</a>
+{% elif not 'sort' in request.GET.keys and default == 'desc' %}
+<a href="{{request.path}}{% get_param_set 'sort' abs %}">
+    <i class="bi bi-arrow-down"></i><b><i class="bi bi-arrow-up text-black"></i></b>
+</a>
+{% elif request.GET.sort == abs %}
+<a href="{{request.path}}{% get_param_set 'sort' desc %}">
+    <b><i class="bi bi-arrow-down text-black"></i></b><i class="bi bi-arrow-up"></i>
+</a>
+{% elif not 'sort' in request.GET.keys and default == 'abs' %}
+<a href="{{request.path}}{% get_param_set 'sort' desc %}">
+    <b><i class="bi bi-arrow-down text-black"></i></b><i class="bi bi-arrow-up"></i>
+</a>
+{% else %}
+<a href="{{request.path}}{% get_param_set 'sort' abs %}">
+    <i class="bi bi-arrow-down"></i>
+</a>
+<a href="{{request.path}}{% get_param_set 'sort' desc %}">
+    <i class="bi bi-arrow-up"></i>
+</a>
+{% endif %}
