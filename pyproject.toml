@@ -21,7 +21,7 @@ dev = ["ruff", "pytest", "pytest-django"]
 where = ["src"]
 
 [tool.setuptools.package-data]
-app_wiki = [
+app_base = [
     "locale/**/*",
     "management/**/*",
     "migrations/**/*",
