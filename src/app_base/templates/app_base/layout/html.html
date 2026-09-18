@@ -1,21 +1,21 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>{% block title %}portal{% if title %} | {{title}}{% endif %}{% endblock title %}</title>
-    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
     <meta name="supported-color-schemes" content="light dark">
+    
     <link rel="stylesheet" href="{% static 'node_modules/@fontsource/source-sans-3/index.css' %}">
     <link rel="stylesheet" href="{% static 'node_modules/overlayscrollbars/styles/overlayscrollbars.min.css' %}">
     <link rel="stylesheet" href="{% static 'node_modules/bootstrap-icons/font/bootstrap-icons.min.css' %}">
     <link rel="stylesheet" href="{% static 'node_modules/admin-lte/dist/css/adminlte.css' %}">
     <link rel="stylesheet" href="{% static 'node_modules/tom-select/dist/css/tom-select.bootstrap5.min.css' %}">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    {% include 'app_base/layout/title.html' %}
     <style>
         .py-0 {
             padding-top: 0 !important;
@@ -69,7 +69,6 @@
     {% endcomment %}-->
     {% block css %}{% endblock css %}
 </head>
-
 <body
     class="layout-fixed sidebar-expand-lg sidebar-mini {% if sidebar_collapse %}sidebar-collapse{% else %}sidebar-open{% endif %} bg-body-tertiary app-loaded">
     <div class="app-wrapper">
@@ -92,10 +91,7 @@
         <aside class="app-sidebar bg-dark-subtle" data-bs-theme="">
             <div class="sidebar-brand sp_color">
                 <a href="/" class="brand-link">
-                    <img src="{% static 'images/logo.jpg' %}" alt="Лого"
-                        class="brand-image opacity-100 logo-collapsed logo-expanded" style="max-height: 60px;">
-                    <!-- <img src="{% static 'images/logo-wide.png' %}" alt="Логотип" class="brand-image opacity-100 logo-expanded"> -->
-                    <span class="brand-text fw-light text-white">Текст</span>
+                    {% include 'app_base/layout/logo.html' %}
                 </a>
             </div>
             <div class="sidebar-wrapper sp_color">
