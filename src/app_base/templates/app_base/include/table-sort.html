@@ -1,4 +1,4 @@
-{% load app_base_tag %}
+{% load app_base_tags %}
 {% if request.GET.sort == desc %}
 <a href="{{request.path}}{% get_param_set 'sort' abs %}">
     <i class="bi bi-arrow-down"></i><b><i class="bi bi-arrow-up text-black"></i></b>

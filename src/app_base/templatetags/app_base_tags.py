@@ -17,7 +17,7 @@ def to_str(value):
 
     try:
         return str(value)
-    except Exception as _:  # pylint: disable=broad-except
+    except Exception as _:
         return value
 
 
@@ -27,7 +27,7 @@ def to_int(value):
 
     try:
         return int(value)
-    except Exception as _:  # pylint: disable=broad-except
+    except Exception as _:  # noqa: BLE001
         return value
 
 
@@ -35,18 +35,23 @@ def to_int(value):
 def search_replace(value, arg):
     """Замена текста в строке для подсветки строки поиска в шаблоне."""
 
-    if arg not in {None, ""} and value not in {None, ""}:
-        num = value.lower().find(arg.lower())
-        if num != -1:
-            result = (
-                value[:num]
-                + "<span class='text-info'>"
-                + value[num : num + len(arg)]
-                + "</span>"
-                + value[num + len(arg) :]
-            )
-            return mark_safe(result)
-    return value
+    if not arg or not value:
+        return value
+    
+    # Приводим к нижнему регистру
+    value_lower = value.lower()
+    arg_lower = arg.lower()
+    
+    # Ищем позицию
+    num = value_lower.find(arg_lower)
+    if num == -1:
+        return value
+    
+    # Собираем
+    end_pos = num + len(arg)
+    result = f"{value[:num]}<span class='text-info'>{value[num:end_pos]}</span>{value[end_pos:]}"
+    
+    return mark_safe(result)
 
 
 @register.filter(name="currency")
@@ -57,7 +62,7 @@ def currency_format(value):
         return 0.0
 
     try:
-        currency = "{:,.2f}".format(value).replace(",", " ").replace(".", ",")
+        currency = f"{value:,.2f}".replace(",", " ").replace(".", ",")
     except Exception as _:
         currency = value
 
@@ -89,7 +94,7 @@ def get_param_set(context, name=None, value=None):
     if name is None:
         # Параметр не указан, просто возвращаем строку
         pass
-    elif value is None and name in params.keys():
+    elif value is None and name in params:
         # Значение не указано, удаляем параметр
         params.pop(name)
     else:
