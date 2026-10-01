@@ -1,0 +1,1 @@
+app-sidebar bg-dark-subtle sp_color" data-bs-theme=""

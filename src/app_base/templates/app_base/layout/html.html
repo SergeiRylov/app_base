@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" {% include 'app_base/layout/class/html.txt' %} >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
@@ -16,63 +16,13 @@
     <link rel="stylesheet" href="{% static 'node_modules/tom-select/dist/css/tom-select.bootstrap5.min.css' %}">
     <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     {% include 'app_base/layout/title.html' %}
-    <style>
-        .py-0 {
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-            outline: none !important;
-            box-shadow: none !important;
-        }
-
-        .count_delimiter {
-            border-left-width: 1px;
-            border-left-style: solid;
-            padding-left: 0.5rem;
-            margin-left: 0.5rem;
-
-        }
-
-        .sp_color {
-            background-color: rgb(9, 61, 119);
-        }
-
-        /* {# Когда меню свернуто #} */
-        .sidebar-collapse .logo-expanded {
-            display: none;
-        }
-
-        .sidebar-collapse .logo-collapsed {
-            display: inline-block;
-        }
-
-        /* {# Когда меню развернуто #} */
-        .sidebar-open .logo-collapsed {
-            display: none;
-        }
-
-        .sidebar-open .logo-expanded {
-            display: inline-block;
-        }
-
-        .form-control-disabled {
-            background-color: var(--bs-secondary-bg);
-        }
-    </style>
-    <!-- {% comment %}
-        .text-primary {
-            color: rgb(9, 61, 119) !important;
-        }
-
-        .bg-primary {
-            background-color: rgb(9, 61, 119) !important;
-        }
-    {% endcomment %}-->
+    {% include 'app_base/layout/style.html' %}
     {% block css %}{% endblock css %}
 </head>
 <body
-    class="layout-fixed sidebar-expand-lg sidebar-mini {% if sidebar_collapse %}sidebar-collapse{% else %}sidebar-open{% endif %} bg-body-tertiary app-loaded">
+    class="{% include 'app_base/layout/class/body.txt' %} {% if sidebar_collapse %}sidebar-collapse{% else %}sidebar-open{% endif %}">
     <div class="app-wrapper">
-        <nav class="app-header navbar navbar-expand bg-body-secondary" data-bs-theme="">
+        <nav class="{% include 'app_base/layout/class/nav.txt' %}">
             <div class="container-fluid">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -88,13 +38,13 @@
                 </ul>
             </div>
         </nav>
-        <aside class="app-sidebar bg-dark-subtle" data-bs-theme="">
-            <div class="sidebar-brand sp_color">
+        <aside class="{% include 'app_base/layout/class/aside.txt' %}">
+            <div class="sidebar-brand">
                 <a href="/" class="brand-link">
                     {% include 'app_base/layout/logo.html' %}
                 </a>
             </div>
-            <div class="sidebar-wrapper sp_color">
+            <div class="sidebar-wrapper">
                 <nav class="mt-2">
                     {% include 'app_base/layout/sidebar-menu.html' %}
                 </nav>
