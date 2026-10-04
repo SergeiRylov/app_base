@@ -85,7 +85,7 @@
                         {{message|safe}}
                     </div>
                     {% elif message.tags == "warning" %}
-                    <div class="callout callout-success"
+                    <div class="callout callout-warning"
                         style="padding-top: 1rem;padding-bottom: 1rem;margin-top: 0.25rem;margin-bottom: 0.25rem;">
                         {{message|safe}}
                     </div>
@@ -100,7 +100,7 @@
                         {{message|safe}}
                     </div>
                     {% else %}
-                    <div class="callout callout-danger"
+                    <div class="callout callout-info"
                         style="padding-top: 1rem;padding-bottom: 1rem;margin-top: 0.25rem;margin-bottom: 0.25rem;">
                         <h5><i class="icon fas fa-ban"></i> ? {{message|safe}}</h5>
                     </div>
