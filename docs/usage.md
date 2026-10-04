@@ -9,10 +9,10 @@
 
    ```python
    TEMPLATES = [
-	   {
-		   # ...
-		   "DIRS": [BASE_DIR / "templates"],
-	   },
+       {
+           # ...
+           "DIRS": [BASE_DIR / "templates"],
+       },
    ]
    ```
 
@@ -34,9 +34,44 @@
 
 ### Замена элементов базового шаблона
 
-...
+#### favicon.ico, logo.png, apple-touch-icon.png
 
-### Шаблоны для полей форм
+Для использования собственного логотипа:
+
+**Вариант 1**.  
+
+Укажите расположение файлов в файле 'settings.py' в каталоге `static`
+
+```python
+FAVICON_PATH = "images/favicon.ico"
+LOGO_PATH = "images/logo.png"
+APPLE_TOUCH_ICON_PATH = "images/apple-touch-icon.png"
+```
+
+**Вариант 2**.  
+
+Поместите файлы в соответствующие каталоги
+
+- `favicon.ico` в каталог `/static/`
+- `apple-touch-icon.png` в каталог `/static/`
+- `logo.png` в каталог `/static/images/`
+
+Сначала происходит проверка наличия переменных в файле `settings.py`,
+потом проверяется наличие файлов в указанных каталогах.
+Если проверка не дает результатов, используются файлы из каталога `images/default/`
+
+### Замена названия сайта
+
+По умолчанию название сайта `wiki portal`
+
+Для замены названия сайта создайте файл в каталоге
+`templates/app_base/layout/class/site_name.txt`
+
+```text
+<site name>
+```
+
+## Шаблоны для полей форм
 
 Формируют html код для поля формы, включая название поля, отметку required, вывод подписи или сообщения об ошибке
 
@@ -47,7 +82,7 @@
 - select
 - select2 (by TomSelect)
 - select2m (multiply values by TomSelect)
-- textarea 
+- textarea
 - time
 
 ```django
@@ -60,10 +95,6 @@
 {% include 'app_base/forms/str/input.html' with field=form.user_name_eng %}
 ```
 
-### Модальные окна
+## Модальные окна
 
 To be continue ...
-
-
-
-

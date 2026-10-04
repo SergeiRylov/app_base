@@ -14,8 +14,10 @@
     <link rel="stylesheet" href="{% static 'node_modules/bootstrap-icons/font/bootstrap-icons.min.css' %}">
     <link rel="stylesheet" href="{% static 'node_modules/admin-lte/dist/css/adminlte.css' %}">
     <link rel="stylesheet" href="{% static 'node_modules/tom-select/dist/css/tom-select.bootstrap5.min.css' %}">
-    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-    {% include 'app_base/layout/title.html' %}
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <title>{% block title %}{% if title %}{{title}} | {% endif %}{% include 'app_base/layout/class/site_name.txt' %}{% endblock title %}</title>
     {% include 'app_base/layout/style.html' %}
     {% block css %}{% endblock css %}
 </head>
