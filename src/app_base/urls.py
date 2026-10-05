@@ -24,7 +24,7 @@ def favicon_url():
     if hasattr(settings, "FAVICON_PATH"):
         return os.path.join(settings.STATIC_URL, settings.FAVICON_PATH)
     elif os.path.isfile(os.path.join(settings.STATIC_ROOT, "favicon.ico")):
-        return os.path.join(settings.STATIC_URL, "images", "favicon.ico")
+        return os.path.join(settings.STATIC_URL, "favicon.ico")
     else:
         return os.path.join(settings.STATIC_URL, "images/default/favicon.ico")
 
@@ -33,7 +33,7 @@ def apple_touch_icon_url():
     if hasattr(settings, "FAVICON_PATH"):
         return os.path.join(settings.STATIC_URL, settings.FAVICON_PATH)
     elif os.path.isfile(os.path.join(settings.STATIC_ROOT, "apple-touch-icon.png")):
-        return os.path.join(settings.STATIC_URL, "images", "apple-touch-icon.png")
+        return os.path.join(settings.STATIC_URL, "apple-touch-icon.png")
     else:
         return os.path.join(settings.STATIC_URL, "images/default/apple-touch-icon.png")
 
