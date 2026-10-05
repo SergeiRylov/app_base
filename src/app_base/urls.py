@@ -12,30 +12,30 @@ app_name = "app_base"
 
 
 def logo_url():
-    if hasattr(settings, "LOGO_PATH"):
-        return os.path.join(settings.STATIC_URL, settings.LOGO_PATH)
+    if hasattr(settings, "LOGO_PATH") and os.path.isfile(os.path.join(settings.STATIC_ROOT, settings.LOGO_PATH)):
+        return f"{settings.STATIC_URL}{settings.LOGO_PATH}"
     elif os.path.isfile(os.path.join(settings.STATIC_ROOT, "images", "logo.png")):
-        return os.path.join(settings.STATIC_URL, "images", "logo.png")
+        return f"{settings.STATIC_URL}images/logo.png"
     else:
-        return os.path.join(settings.STATIC_URL, "images/default/logo.png")
+        return f"{settings.STATIC_URL}images/default/logo.png"
 
 
 def favicon_url():
-    if hasattr(settings, "FAVICON_PATH"):
-        return os.path.join(settings.STATIC_URL, settings.FAVICON_PATH)
+    if hasattr(settings, "FAVICON_PATH") and os.path.isfile(os.path.join(settings.STATIC_ROOT, settings.FAVICON_PATH)):
+        return f"{settings.STATIC_URL}{settings.FAVICON_PATH}"
     elif os.path.isfile(os.path.join(settings.STATIC_ROOT, "favicon.ico")):
-        return os.path.join(settings.STATIC_URL, "favicon.ico")
+        return f"{settings.STATIC_URL}favicon.ico"
     else:
-        return os.path.join(settings.STATIC_URL, "images/default/favicon.ico")
+        return f"{settings.STATIC_URL}images/default/favicon.ico"
 
 
 def apple_touch_icon_url():
-    if hasattr(settings, "FAVICON_PATH"):
-        return os.path.join(settings.STATIC_URL, settings.FAVICON_PATH)
+    if hasattr(settings, "APPLE_TOUCH_ICON_PATH") and os.path.isfile(os.path.join(settings.STATIC_ROOT, settings.APPLE_TOUCH_ICON_PATH)):
+        return f"{settings.STATIC_URL}{settings.APPLE_TOUCH_ICON_PATH}"
     elif os.path.isfile(os.path.join(settings.STATIC_ROOT, "apple-touch-icon.png")):
-        return os.path.join(settings.STATIC_URL, "apple-touch-icon.png")
+        return f"{settings.STATIC_URL}apple-touch-icon.png"
     else:
-        return os.path.join(settings.STATIC_URL, "images/default/apple-touch-icon.png")
+        return f"{settings.STATIC_URL}images/default/apple-touch-icon.png"
 
 
 urlpatterns = [
