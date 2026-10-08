@@ -60,6 +60,26 @@ APPLE_TOUCH_ICON_PATH = "images/apple-touch-icon.png"
 потом проверяется наличие файлов в указанных каталогах.
 Если проверка не дает результатов, используются файлы из каталога `images/default/`
 
+В общем случае, рекомендуется использовать **Вариант 2**
+и вставить в конфигурационный файл nginx соответствующую секцию
+
+```bash
+    location = /favicon.ico {
+    alias /var/www/www.site.name/static/favicon.ico;
+        # access_log off;
+    log_not_found on;
+    expires 30d;
+    }
+
+    location = /apple-touch-icon.png {
+    alias /var/www/www.site.name/static/apple-touch-icon.png;
+        # access_log off;
+    log_not_found on;
+    expires 30d;
+    }
+
+```
+
 ### Замена названия сайта
 
 По умолчанию название сайта `wiki portal`
