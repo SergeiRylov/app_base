@@ -1,5 +1,4 @@
-{% load static %}
-<!DOCTYPE html>
+{% load static %}<!DOCTYPE html>
 <html lang="en" {% include 'app_base/layout/class/html.txt' %} >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,7 +9,7 @@
     <meta name="supported-color-schemes" content="light dark">
     
     <link rel="stylesheet" href="{% static 'node_modules/@fontsource/source-sans-3/index.css' %}">
-    <link rel="stylesheet" href="{% static 'node_modules/overlayscrollbars/styles/overlayscrollbars.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'node_modules/overlayscrollbars/styles/overlayscrollbars.min.css' %}"> -->
     <link rel="stylesheet" href="{% static 'node_modules/bootstrap-icons/font/bootstrap-icons.min.css' %}">
     <link rel="stylesheet" href="{% static 'node_modules/admin-lte/dist/css/adminlte.css' %}">
     <link rel="stylesheet" href="{% static 'node_modules/tom-select/dist/css/tom-select.bootstrap5.min.css' %}">
@@ -120,11 +119,11 @@
             {% include 'app_base/layout/page-footer.html' %}
         </footer>
     </div>
-    <script src="{% static 'node_modules/overlayscrollbars/browser/overlayscrollbars.browser.es6.min.js' %}"></script>
+    <!-- <script src="{% static 'node_modules/overlayscrollbars/browser/overlayscrollbars.browser.es6.min.js' %}"></script> -->
     <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'node_modules/tom-select/dist/js/tom-select.complete.min.js' %}"></script>
     <script src="{% static 'node_modules/admin-lte/dist/js/adminlte.js' %}"></script>
-    <script>
+    <!-- <script>
         const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper"
         const Default = {
             scrollbarTheme: "os-theme-light",
@@ -146,31 +145,7 @@
                 })
             }
         })
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Find the link tag for the main AdminLTE CSS file.
-            const cssLink = document.querySelector('link[href*="css/adminlte.css"]');
-            if (!cssLink) {
-                return; // Exit if the link isn't found
-            }
-
-            // Extract the app_base path from the CSS href.
-            // e.g., from "../css/adminlte.css", we get "../"
-            // e.g., from "./css/adminlte.css", we get "./"
-            const cssHref = cssLink.getAttribute('href');
-            const deploymentPath = cssHref.slice(0, cssHref.indexOf('css/adminlte.css'));
-
-            // Find all images with absolute paths and fix them.
-            document.querySelectorAll('img[src^="/assets/"]').forEach(img => {
-                const originalSrc = img.getAttribute('src');
-                if (originalSrc) {
-                    const relativeSrc = originalSrc.slice(1); // Remove leading '/'
-                    img.src = deploymentPath + relativeSrc;
-                }
-            });
-        });
-    </script>
+    </script> -->
     {% include 'app_base/layout/modal.html' %}
     <script>
         try {

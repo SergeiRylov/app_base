@@ -1,29 +1,22 @@
-from datetime import date, timedelta
+from datetime import date
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as django_logout
+from django.core.mail import mail_admins
+from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import Resolver404, resolve
 from django.utils.translation import gettext_lazy as _
-from django.core.mail import mail_admins
-from django.http import Http404
 
 from app_base import forms
 
 
-
 def index(request):
-    """
-    Главная страница
-    """
+    """Главная страница"""
 
     title = "Главная"
     breadcrumbs = [(None, title)]
-
-    current_date = date.today()
-
-
 
     content = {
         "title": title,
@@ -33,10 +26,8 @@ def index(request):
     return render(request, "app_base/index.html", content)
 
 
-
-
 def login_modal(request):
-    """Стандартный вход в систему"""
+    """Вход в систему через модальное окно"""
 
     form = forms.LoginForm(request.POST or None)
     msg = None
@@ -47,7 +38,6 @@ def login_modal(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-
 
                 return redirect(request.META["HTTP_REFERER"])
             else:
@@ -79,7 +69,6 @@ def login_page(request):
             if user is not None:
                 login(request, user)
 
-
                 url = request.GET.get("next", None)
                 if url is not None:
                     try:
@@ -100,6 +89,30 @@ def login_page(request):
 
     return render(request, "app_base/login-page.html", content)
 
+
+def login_only(request):
+    """Отдельная страница для входа в систему, где показывается только поля ввода"""
+
+    if request.user.is_authenticated:
+        return redirect("/")
+
+    form = forms.LoginForm(request.POST or None)
+    msg = None
+    if request.method == "POST":
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("/")
+        #     else:
+        #         messages.error(request, _("Invalid credentials"))
+        # else:
+        #     messages.error(request, _("Error validating the form"))
+        return redirect("/login/")
+
+    return render(request, "app_base/login-only.html", {"form": form, "msg": msg})
 
 # def password(request):
 #     if request.POST:
