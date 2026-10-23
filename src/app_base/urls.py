@@ -59,6 +59,7 @@ def logo_view(request):
 urlpatterns = [
     path("favicon.ico", favicon_view),
     path("apple-touch-icon.png", apple_touch_icon_view),
+    path("apple-touch-icon-precomposed.png", apple_touch_icon_view),
     path("logo.png", logo_view),
     path("login-modal/", views.login_modal, name="login-modal"),
     path("accounts/login/", views.login_page, name="login-page"),
