@@ -1,4 +1,15 @@
 <style>
+    @media (max-width: 767.98px) {
+        body.layout-fixed .app-sidebar {
+            margin-left: -250px;
+        }
+
+        body.sidebar-open .app-sidebar {
+            margin-left: 0;
+        }
+    }
+
+
     .py-0 {
         padding-top: 0 !important;
         padding-bottom: 0 !important;
@@ -38,5 +49,11 @@
 
     .sp_color {
         background-color: rgb(9, 61, 119) !important;
+    }
+
+    .bg-gradient-sky {
+        color: #fff !important;
+        background-color: #127caf !important;
+        background-image: var(--bs-gradient) !important;
     }
 </style>
