@@ -2,8 +2,8 @@
 <li class="nav-item dropdown user-menu">
     {% if user.is_authenticated %}
     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-        <!-- <img src="{% static 'admin-lte/assets/img/user2-160x160.jpg' %}" class="user-image rounded-circle shadow" alt="User Image" /> -->
-        <span class="d-none d-md-inline">{{request.user.get_full_name|default:request.user}}</span>
+        <i class="bi bi-person text-gray m-2"></i>
+        <span class="d-none d-md-inline">{{ request.user.get_full_name|default:request.user }}</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
         {% if request.user.is_superuser %}
@@ -17,7 +17,9 @@
                 fakelogin
             </a>
         </li>
-        <li><hr class="dropdown-divider"></li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
         {% endif %}
         <li>
             <a class="dropdown-item" href="{% url 'app_base:logout' %}">
@@ -27,6 +29,7 @@
     </ul>
     {% else %}
     <a class="nav-link modal-link" href="{% url 'app_base:login-modal' %}">
+        <i class="bi bi-person text-gray m-2"></i>
         Вход
     </a>
     {% endif %}
