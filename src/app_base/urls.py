@@ -23,7 +23,10 @@ def favicon_view(request):
         file_path = os.path.join(settings.STATIC_ROOT, "favicon.ico")
     else:
         file_path = finders.find("images/default/favicon.ico")
-    return FileResponse(open(file_path, "rb"), content_type="image/x-icon")
+
+    response = FileResponse(open(file_path, "rb"), content_type="image/x-icon")
+    response["Cache-Control"] = "public, max-age=86400"
+    return response
 
 
 def apple_touch_icon_view(request):
@@ -32,13 +35,15 @@ def apple_touch_icon_view(request):
     if hasattr(settings, "APPLE_TOUCH_ICON_PATH") and os.path.isfile(
         os.path.join(settings.STATIC_ROOT, settings.APPLE_TOUCH_ICON_PATH)
     ):
-        file_path = os.path.join(settings.STATIC_ROOT, settings.FAVICON_PATH)
+        file_path = os.path.join(settings.STATIC_ROOT, settings.APPLE_TOUCH_ICON_PATH)
     elif os.path.isfile(os.path.join(settings.STATIC_ROOT, "apple-touch-icon.png")):
         file_path = os.path.join(settings.STATIC_ROOT, "apple-touch-icon.png")
     else:
         file_path = finders.find("images/default/apple-touch-icon.png")
 
-    return FileResponse(open(file_path, "rb"), content_type="image/png")
+    response = FileResponse(open(file_path, "rb"), content_type="image/png")
+    response["Cache-Control"] = "public, max-age=86400"
+    return response
 
 
 def logo_view(request):
@@ -47,13 +52,15 @@ def logo_view(request):
     if hasattr(settings, "LOGO_PATH") and os.path.isfile(
         os.path.join(settings.STATIC_ROOT, settings.LOGO_PATH)
     ):
-        file_path = os.path.join(settings.STATIC_ROOT, settings.FAVICON_PATH)
+        file_path = os.path.join(settings.STATIC_ROOT, settings.LOGO_PATH)
     elif os.path.isfile(os.path.join(settings.STATIC_ROOT, "logo.png")):
         file_path = os.path.join(settings.STATIC_ROOT, "logo.png")
     else:
         file_path = finders.find("images/default/logo.png")
 
-    return FileResponse(open(file_path, "rb"), content_type="image/png")
+    response = FileResponse(open(file_path, "rb"), content_type="image/png")
+    response["Cache-Control"] = "public, max-age=86400"
+    return response
 
 
 urlpatterns = [
